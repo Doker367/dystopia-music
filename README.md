@@ -9,7 +9,7 @@
     <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-3.47+-02569B?logo=flutter&logoColor=white" alt="Flutter Version" /></a>
     <a href="https://dart.dev"><img src="https://img.shields.io/badge/Dart-3.13+-0175C2?logo=dart&logoColor=white" alt="Dart Version" /></a>
     <a href="https://developer.android.com"><img src="https://img.shields.io/badge/Platform-Android%208.0%2B-3DDC84?logo=android&logoColor=white" alt="Android" /></a>
-    <a href="https://github.com/Doker367/dystopia-music"><img src="https://img.shields.io/badge/Author-Doker%20(%40Doker367)-A8B545?logo=github&logoColor=white" alt="Author" /></a>
+    <a href="https://github.com/Doker367"><img src="https://img.shields.io/badge/Author-Doker%20%7C%20GreenCode-A8B545?logo=github&logoColor=white" alt="Author" /></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License" /></a>
   </p>
 </div>
@@ -19,6 +19,27 @@
 ## ⚡ Acerca de Dystopia
 
 **DYSTOPIA** es un reproductor de música de alto rendimiento desarrollado en **Flutter** para **Android**, inspirado en una estética visual **Cyberpunk / Glassmorphic Neo-Dark**. Combina reproducción en segundo plano sin interrupciones, efectos de ecualización por hardware nativo, descarga de pistas offline con porcentaje en tiempo real y widgets dinámicos para la pantalla de inicio.
+
+---
+
+## 📱 Capturas de Pantalla
+
+<div align="center">
+  <table>
+    <tr>
+      <th align="center"><b>Pantalla Principal (Inicio & Efectos DSP)</b></th>
+      <th align="center"><b>Ajustes & Créditos a Doker</b></th>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="assets/screenshots/home_screen.png" alt="Pantalla de Inicio Dystopia" width="300" />
+      </td>
+      <td align="center">
+        <img src="assets/screenshots/settings_screen.png" alt="Ajustes y Créditos Doker" width="300" />
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
@@ -43,6 +64,21 @@
   * Servidor proxy loopback local de alta velocidad para streaming estable y sin latencia.
 * 🖤 **Estética Cyberpunk Glassmorphic**:
   * Fondos en negro profundo (`#0D0D0D`, `#121214`), acentos lima neón (`#A8B545`), desenfoques de vidrio en tiempo real (`BackdropFilter`) y renderizado fluido a 120 FPS (Impeller Vulkan).
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework**: [Flutter 3.24+](https://flutter.dev) (Impeller & Vulkan rendering engine)
+* **Language**: [Dart 3.5+](https://dart.dev)
+* **Design System**: Material Design 3 (Dark Cyberpunk Glassmorphic Theme)
+* **State Management**: [Flutter Riverpod](https://pub.dev/packages/flutter_riverpod)
+* **Routing**: [GoRouter](https://pub.dev/packages/go_router)
+* **Audio Engine**: [just_audio](https://pub.dev/packages/just_audio) & [audio_service](https://pub.dev/packages/audio_service)
+* **Hardware DSP**: Android Equalizer & Android Loudness Enhancer nativo
+* **Storage**: [Hive](https://pub.dev/packages/hive) & [Hive Flutter](https://pub.dev/packages/hive_flutter) (NoSQL ultrarrápido)
+* **Local Proxy**: Servidor local loopback HTTP integrado con Shelf
+* **Networking**: [Dio](https://pub.dev/packages/dio) & Connectivity Plus
 
 ---
 
@@ -109,11 +145,14 @@ lib/
 
 ---
 
-## 👨‍💻 Créditos y Autoría
+## 👏 Créditos y Autoría
 
-* **Creador y Desarrollador Principal**: **Alberto E. Grajales (Doker)**
+Built with 🖤 by **Doker** & **GreenCode**.
+
+* **Arquitecto y Desarrollador Principal**: **Alberto E. Grajales (Doker)**
   * **GitHub**: [@Doker367](https://github.com/Doker367)
-  * **Repositorio**: [dystopia-music](https://github.com/Doker367/dystopia-music)
+  * **Organización / Marca**: **GreenCode**
+  * **Repositorio Oficial**: [https://github.com/Doker367/dystopia-music](https://github.com/Doker367/dystopia-music)
 
 ---
 
@@ -121,16 +160,16 @@ lib/
 
 Este proyecto es de **código abierto** y libre para toda la comunidad:
 
-* ✅ **Uso Libre**: Puedes descargar, compilar, modificar y utilizar este reproductor tanto para uso personal como para fines educativos o proyectos propios.
-* 📌 **Solicitud de Atribución**: Si utilizas este proyecto, su código fuente, arquitectura, diseño o widgets como base o referencia para tus propios desarrollos, **te pedimos cordialmente que des la mención correspondiente a Doker y enlaces a este repositorio**:
+* ✅ **Uso Libre**: Puedes descargar, compilar, modificar y utilizar este reproductor o su código fuente libremente para proyectos personales, comerciales o educativos.
+* 📌 **Solicitud de Atribución**: Si utilizas este proyecto, su código fuente, arquitectura, diseño o widgets como base o referencia para tus propios desarrollos, **te pedimos cordialmente dar la mención correspondiente a Doker / GreenCode y enlazar a este repositorio**:
 
 ```text
-Basado en / Referenciado de Dystopia Music por Doker (@Doker367)
+Basado en / Referenciado de Dystopia Music por Doker & GreenCode (@Doker367)
 https://github.com/Doker367/dystopia-music
 ```
 
 ---
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia **MIT** — consulta el archivo [LICENSE](LICENSE) para más detalles.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
