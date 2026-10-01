@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:dystopia/core/services/local_stream_server.dart';
 import 'package:dystopia/player/player_controller.dart';
 import 'package:dystopia/presentation/providers/search_provider.dart';
 import 'package:dystopia/presentation/widgets/artwork_widget.dart';
@@ -32,6 +33,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Pre-warm the top 3 search results in background as soon as results arrive
+    ref.listen(searchProvider, (previous, next) {
+      if (next.results != null && next.results!.songs.isNotEmpty) {
+        final topIds = next.results!.songs.take(3).map((s) => s.id).toList();
+        LocalStreamServer.prewarmTopTracks(topIds);
+      }
+    });
+
     final searchState = ref.watch(searchProvider);
 
     return Scaffold(

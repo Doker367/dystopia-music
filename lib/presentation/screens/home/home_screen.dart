@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:dystopia/core/services/permission_service.dart';
+import 'package:dystopia/core/services/local_stream_server.dart';
 import 'package:dystopia/domain/entities/song.dart';
 import 'package:dystopia/player/player_controller.dart';
 import 'package:dystopia/providers/youtube_music_provider.dart';
@@ -37,6 +38,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ref.read(audioPlayerServiceProvider).setDspMode(_audioMode);
       } catch (e) {
         debugPrint('[HomeScreen] setDspMode error: $e');
+      }
+
+      // Pre-warm top songs in background so tapping them plays instantly
+      try {
+        final topIds = [
+          ...YouTubeMusicProvider.rockSongs.take(2),
+          ...YouTubeMusicProvider.popSongs.take(2),
+        ].map((s) => s.id).toList();
+        LocalStreamServer.prewarmTopTracks(topIds);
+      } catch (e) {
+        debugPrint('[HomeScreen] Prewarm error: $e');
       }
     });
   }

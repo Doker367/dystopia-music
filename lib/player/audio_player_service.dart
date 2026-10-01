@@ -256,8 +256,29 @@ class AudioPlayerService extends BaseAudioHandler with SeekHandler {
           ? Hive.box('settings').get('audioDspMode', defaultValue: 'HIFI 320K')
           : 'HIFI 320K';
       _applyDspModeInternal(currentDsp);
+
+      // Prefetch the next track in the queue in background so track transition is instant
+      _prefetchNextTrack();
     } catch (e) {
       debugPrint('[AudioPlayerService] Error playing audio: $e');
+    }
+  }
+
+  void _prefetchNextTrack() {
+    try {
+      final queue = _queueManager.queue;
+      final idx = _queueManager.currentIndex;
+      if (idx + 1 < queue.length) {
+        final nextSong = queue[idx + 1];
+        final nextId = (nextSong.streamUrl != null &&
+                nextSong.streamUrl!.isNotEmpty &&
+                !nextSong.streamUrl!.startsWith('http'))
+            ? nextSong.streamUrl!
+            : nextSong.id;
+        LocalStreamServer.prefetch(nextId);
+      }
+    } catch (e) {
+      debugPrint('[AudioPlayerService] Prefetch next track error: $e');
     }
   }
 
