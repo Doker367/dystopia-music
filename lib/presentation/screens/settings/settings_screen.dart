@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:dystopia/core/services/local_stream_server.dart';
 
@@ -196,6 +197,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const SizedBox(height: 20),
 
+          // Seccion Creditos & Atribucion
+          _buildSectionHeader('CRÉDITOS & ATRIBUCIÓN'),
+          _buildCard([
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color(0xFFA8B545).withValues(alpha: 0.16),
+                ),
+                child: const Icon(Icons.code_rounded, color: Color(0xFFA8B545), size: 20),
+              ),
+              title: const Text('Creado por Doker', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
+              subtitle: Text(
+                'Código abierto y uso libre con atribución. Toca para ver detalles.',
+                style: TextStyle(color: Colors.white.withValues(alpha: 0.55), fontSize: 12),
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white30, size: 14),
+              onTap: () => _showCreditsModal(context),
+            ),
+          ]),
+
+          const SizedBox(height: 20),
+
           // Seccion Informacion
           _buildSectionHeader('SISTEMA & LICENCIA'),
           _buildCard([
@@ -208,11 +233,156 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               leading: const Icon(Icons.verified_user_outlined, color: Color(0xFFA8B545)),
               title: const Text('Licencia y Privacidad', style: TextStyle(color: Colors.white, fontSize: 14)),
-              subtitle: Text('Reproducción legal 100% Offline-First', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12)),
+              subtitle: Text('Código libre • Atribución a Doker • MIT License', style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 12)),
+              onTap: () => _showCreditsModal(context),
             ),
           ]),
         ],
       ),
+    );
+  }
+
+  void _showCreditsModal(BuildContext context) {
+    HapticFeedback.lightImpact();
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF131418),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (ctx) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 24,
+            bottom: MediaQuery.of(ctx).padding.bottom + 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFFA8B545).withValues(alpha: 0.3),
+                      blurRadius: 16,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Image.asset(
+                  'assets/images/distopia_logo_transparent.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'DYSTOPIA MUSIC',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                  letterSpacing: 2.0,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFA8B545).withValues(alpha: 0.18),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: const Color(0xFFA8B545).withValues(alpha: 0.4)),
+                ),
+                child: const Text(
+                  'Creado por Doker (@Doker367)',
+                  style: TextStyle(
+                    color: Color(0xFFA8B545),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1B1C22),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.favorite_rounded, color: Color(0xFFA8B545), size: 20),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'Uso Libre para Todos:\nPuedes utilizar este reproductor y su código fuente libremente para proyectos personales, educativos o de aprendizaje.',
+                            style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 12.5, height: 1.4),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(color: Colors.white10, height: 20),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.bookmark_added_rounded, color: Color(0xFFA8B545), size: 20),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            'Atribución y Referencia:\nSi tomas código, arquitectura, widgets o diseño como base o referencia, te pedimos dar la mención correspondiente a Doker y enlazar al repositorio oficial.',
+                            style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 12.5, height: 1.4),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'https://github.com/Doker367/dystopia-music',
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.45),
+                  fontSize: 11,
+                  fontFamily: 'monospace',
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFA8B545),
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                    padding: const EdgeInsets.symmetric(vertical: 13),
+                  ),
+                  onPressed: () => Navigator.pop(ctx),
+                  child: const Text('Entendido', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
